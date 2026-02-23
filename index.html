@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Hunter</title>
+
+    <link rel="shortcut icon" href="./assets/images/Logo.png" type="image/x-icon">
+
+    <!-- tailwind css cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="tailwind.config.js"></script>
+    <link rel="stylesheet" href="tailwind.css">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 font-geist">
+    <header class="container mx-auto max-w-11/12 py-8 space-y-4">
+        <h1 class="text-4xl font-bold text-[#002C5C]">
+            Job Application Tracker
+        </h1>
+
+        <div class="tracker-container flex justify-between gap-4">
+            <button class="bg-white p-2 rounded-lg shadow-sm w-1/3">
+                <h2 class="text-xs">Total</h2>
+                <p class="text-3xl text-[#002C5C] font-bold">0</p>
+            </button>
+
+            <button class="bg-white p-2 rounded-lg shadow-sm w-1/3">
+                <h2 class="text-xs">Interview</h2>
+                <p class="text-3xl text-[#10B981] font-bold">0</p>
+            </button>
+
+            <button class="bg-white p-2 rounded-lg shadow-sm w-1/3">
+                <h2 class="text-xs">Rejected</h2>
+                <p class="text-3xl text-[#EF4444] font-bold">0</p>
+            </button>
+        </div>
+    </header>
+
+    <hr class="container mx-auto max-w-11/12 h-[2px] opacity-20">
+
+    <main>
+        <!-- Available Jobs Section -->
+        <section class="container mx-auto max-w-11/12 py-8 space-y-6">
+
+            <!-- Jobs Header -->
+            <div class="flex justify-between">
+                <h2 class="text-xl font-semibold text-[#002C5C]">
+                    Available Jobs
+                </h2>
+                <p class="job-count font-medium text-[#64748B]">
+                    <span id="job-count">8</span>
+                    jobs
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="jobs space-y-4">
+                <div class="flex gap-2">
+                    <button id="all-btn" onclick="showOnly('all-jobs')"
+                        class="active-btn py-2 px-4 rounded-lg shadow-sm w-[120px] text-xs font-medium">
+                        All
+                    </button>
+
+                    <button id="interview-btn" onclick="showOnly('interview-list')"
+                        class="inactive-btn py-2 px-4 rounded-lg shadow-sm w-[120px] text-xs font-medium">
+                        Interview
+                    </button>
+
+                    <button id="rejected-btn" onclick="showOnly('rejected-list')"
+                        class="inactive-btn py-2 px-4 rounded-lg shadow-sm w-[120px] text-xs font-medium">
+                        Rejected
+                    </button>
+
+                </div>
+
+                <!-- All Jobs -->
+                <div id="all-jobs" class="space-y-4 w-full">
+
+                    <!-- Job 1 -->
+                    <div id="job-1" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="header flex justify-between">
+                            <div class="flex flex-col space-y-1">
+                                <h2 class="text-xl font-semibold text-[#002C5C]">Tech Innovators</h2>
+                                <p class="text-sm text-[#64748B]">Frontend Developer</p>
+                                <p class="text-sm text-[#64748B]">Remote • Full-time • $110,000 - $150,000</p>
+                            </div>
+
+                            <!-- delete button -->
+                            <button onclick="deleteJob('job-1')"
+                                class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+
+                        </div>
+                        <button
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-sm shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">
+                            Not Applied
+                        </button>
+                        <p>
+                            Create responsive web interfaces with React.js and modern frontend frameworks.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-1')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview</button>
+                            <button onclick="moveToRejected('job-1')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected</button>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div id="job-2" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">Cloud Solutions Inc.</h2>
+                                    <p class="text-sm text-[#64748B]">Backend Developer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $120,000 - $160,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-2')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- status button -->
+                        <button
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied
+                        </button>
+                        <p>
+                            Develop scalable APIs and cloud services using Node.js and AWS technologies.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-2')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-2')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected</button>
+                        </div>
+                    </div>
+
+
+                    <!-- Job 3 -->
+                    <div id="job-3" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">DataWave</h2>
+                                    <p class="text-sm text-[#64748B]">Data Analyst</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $90,000 - $120,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-3')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">
+                            Not Applied
+                        </button>
+                        <p>
+                            Build and maintain data pipelines and ETL processes for large-scale analytics.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-3')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-3')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="job-4" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">AI Labs</h2>
+                                    <p class="text-sm text-[#64748B]">Machine Learning Engineer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $130,000 - $170,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-4')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- status button -->
+                        <button
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied</button>
+                        <p>
+                            Design and implement ML models for AI-powered applications and research.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-4')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">
+                                Interview
+                            </button>
+                            <button onclick="moveToRejected('job-4')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="job-5" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">NextGen Apps</h2>
+                                    <p class="text-sm text-[#64748B]">Full Stack Developer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $110,000 - $150,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-5')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- status button -->
+                        <button onclick="moveToInterview('job-5')"
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied</button>
+                        <p>
+                            Work on both frontend and backend solutions to deliver full-featured web apps.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-5')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-5')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="job-6" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">CyberSecure</h2>
+                                    <p class="text-sm text-[#64748B]">Security Engineer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $120,000 - $160,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-6')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- status button -->
+                        <button onclick="moveToInterview('job-6')"
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied</button>
+                        <p>
+                            Ensure the safety and integrity of systems with modern cybersecurity practices.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-6')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-6')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="job-7" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">GreenTech Solutions</h2>
+                                    <p class="text-sm text-[#64748B]">DevOps Engineer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $120,000 - $160,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-7')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- status button -->
+                        <button onclick="moveToInterview('job-7')"
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied</button>
+                        <p>
+                            Maintain cloud infrastructure, CI/CD pipelines, and deployment automation.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-7')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-7')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="job-8" class="p-4 bg-white rounded-lg shadow-sm space-y-3">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex justify-between">
+                                <div class="header flex flex-col space-y-1">
+                                    <h2 class="text-xl font-semibold text-[#002C5C]">FinTech Pro</h2>
+                                    <p class="text-sm text-[#64748B]">Blockchain Developer</p>
+                                    <p class="text-sm text-[#64748B]">Remote • Full-time • $120,000 - $160,000</p>
+                                </div>
+
+                                <!-- delete button -->
+                                <button onclick="deleteJob('job-8')"
+                                    class="text-[#64748B] rounded-full bg-gray-100 p-4 w-12 h-12 flex items-center justify-center hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- status button -->
+                        <button onclick="moveToInterview('job-8')"
+                            class="job-status bg-[#EEF4FF] text-xs font-medium text-[#002C5C] py-2 px-4 rounded-lg shadow-sm uppercase hover:bg-[#002C5C] hover:text-white transition-all duration-300 cursor-pointer">Not
+                            Applied</button>
+                        <p>
+                            Build secure blockchain-based applications and smart contracts for fintech solutions.
+                        </p>
+                        <div class="btns flex gap-2">
+                            <button onclick="moveToInterview('job-8')"
+                                class="interview-btn border-[#10B981] border-2 py-2 px-3 rounded-lg shadow-sm text-[#10B981] font-semibold text-sm uppercase hover:bg-[#10B981] hover:text-white transition-all duration-300 cursor-pointer">Interview
+                            </button>
+                            <button onclick="moveToRejected('job-8')"
+                                class="rejected-btn border-[#EF4444] border-2 py-2 px-3 rounded-lg shadow-sm text-[#EF4444] font-semibold text-sm uppercase hover:bg-[#EF4444] hover:text-white transition-all duration-300 cursor-pointer">Rejected
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- interview jobs -->
+                <div id="interview-list" class="space-y-4 hidden">
+
+                    <div class="bg-white flex flex-col py-10   justify-center items-center space-y-2 empty-message">
+                        <div class="max-w-xs">
+                            <img src="./assets/images/jobs.png" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center items-center">
+                            <h2 class="text-2xl font-semibold text-[#002C5C]">No jobs available</h2>
+                            <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- rejected jobs -->
+                <div id="rejected-list" class="space-y-4 empty-message hidden">
+                    <div class="bg-white flex flex-col py-10   justify-center items-center space-y-2 empty-message">
+                        <div class="max-w-xs">
+                            <img src="./assets/images/jobs.png" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center items-center">
+                            <h2 class="text-2xl font-semibold text-[#002C5C]">No jobs available</h2>
+                            <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+                        </div>
+                    </div>
+
+                </div>
+
+        </section>
+
+    </main>
+    <footer class="text-center container mx-auto max-w-11/12 py-2 mt-2">
+        <p>Job Hunter &copy; 2026</p>
+    </footer>
+
+    <script src="./assets/scripts/script.js"></script>
+</body>
+
+</html>
