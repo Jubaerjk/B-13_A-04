@@ -114,27 +114,6 @@ function deleteJob(id) {
     updateJobCount();
 }
 
-// function updateJobCount() {
-//     const jobCount = document.getElementById("job-count");
-
-//     const sections = ["all-jobs", "interview-list", "rejected-list"];
-//     let activeSection = null;
-
-//     sections.forEach(sectionId => {
-//         const container = document.getElementById(sectionId);
-//         if (!container.classList.contains("hidden")) {
-//             activeSection = container;
-//         }
-//     });
-
-//     if (!activeSection) return;
-
-//     const jobCards = [...activeSection.children].filter(child =>
-//         child.id && child.id.startsWith("job-")
-//     );
-
-//     jobCount.textContent = jobCards.length;
-// }
 
 function updateJobCount() {
     const totalCountEl = document.getElementById("total-count");
@@ -145,7 +124,6 @@ function updateJobCount() {
     const interviewContainer = document.getElementById("interview-list");
     const rejectedContainer = document.getElementById("rejected-list");
 
-    // Count all jobs in each section
     const allJobsCount = [...allJobsContainer.children].filter(child =>
         child.id && child.id.startsWith("job-")
     ).length;
