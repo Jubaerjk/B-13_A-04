@@ -99,19 +99,74 @@ function moveToAll(id) {
 
 function deleteJob(id) {
     const job = document.getElementById(id);
+
+    if (!job) return;
+
+    // Get the parent container BEFORE removing
+    const parentContainer = job.parentElement;
+    const parentId = parentContainer.id;
+
     job.remove();
-    updateEmptyState("all-jobs");
-    updateEmptyState("interview-list");
-    updateEmptyState("rejected-list");
+
+    // Update empty state only for the affected section
+    updateEmptyState(parentId);
+
     updateJobCount();
 }
 
+// function updateJobCount() {
+//     const jobCount = document.getElementById("job-count");
+
+//     const sections = ["all-jobs", "interview-list", "rejected-list"];
+//     let activeSection = null;
+
+//     sections.forEach(sectionId => {
+//         const container = document.getElementById(sectionId);
+//         if (!container.classList.contains("hidden")) {
+//             activeSection = container;
+//         }
+//     });
+
+//     if (!activeSection) return;
+
+//     const jobCards = [...activeSection.children].filter(child =>
+//         child.id && child.id.startsWith("job-")
+//     );
+
+//     jobCount.textContent = jobCards.length;
+// }
+
 function updateJobCount() {
+    const totalCountEl = document.getElementById("total-count");
+    const interviewCountEl = document.getElementById("interview-count");
+    const rejectedCountEl = document.getElementById("rejected-count");
+
+    const allJobsContainer = document.getElementById("all-jobs");
+    const interviewContainer = document.getElementById("interview-list");
+    const rejectedContainer = document.getElementById("rejected-list");
+
+    // Count all jobs in each section
+    const allJobsCount = [...allJobsContainer.children].filter(child =>
+        child.id && child.id.startsWith("job-")
+    ).length;
+
+    const interviewCount = [...interviewContainer.children].filter(child =>
+        child.id && child.id.startsWith("job-")
+    ).length;
+
+    const rejectedCount = [...rejectedContainer.children].filter(child =>
+        child.id && child.id.startsWith("job-")
+    ).length;
+
+    // Update the HTML
+    totalCountEl.textContent = allJobsCount + interviewCount + rejectedCount;
+    interviewCountEl.textContent = interviewCount;
+    rejectedCountEl.textContent = rejectedCount;
+
     const jobCount = document.getElementById("job-count");
 
     const sections = ["all-jobs", "interview-list", "rejected-list"];
     let activeSection = null;
-
     sections.forEach(sectionId => {
         const container = document.getElementById(sectionId);
         if (!container.classList.contains("hidden")) {
@@ -126,6 +181,7 @@ function updateJobCount() {
     );
 
     jobCount.textContent = jobCards.length;
+
 }
 
 
